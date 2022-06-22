@@ -1,6 +1,5 @@
 package com.example.Sets;
 
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,32 +17,21 @@ public class Rainbow {
             add(new Color("violet"));
         }}; 
         
-        Iterator<Color> it = rainbowColors.iterator();
-        while (it.hasNext()) {
-            Color color = it.next();
-            System.out.println(color.getName());
-        }
+        rainbowColors.forEach(color -> System.out.println(color.getName()));
         System.out.println("=========================");
         
         System.out.println(rainbowColors.size());
         System.out.println("=========================");
         
         Set<Color> sortedRainbowColors = new TreeSet<>(rainbowColors);
-        Iterator<Color> it2 = sortedRainbowColors.iterator();
-        while (it2.hasNext()) {
-            Color color = it2.next();
-            System.out.println(color.getName());
-        }
+        sortedRainbowColors.forEach(color -> System.out.println(color.getName()));
         System.out.println("=========================");
 
         TreeSet<Color> reversedRainbomColor = new TreeSet<>(rainbowColors);
-        Iterator<Color> it3 = reversedRainbomColor.descendingIterator();
-        while (it3.hasNext()) {
-            Color color = it3.next();
-            System.out.println(color.getName());
-        }
+        reversedRainbomColor.descendingSet()
+                            .forEach(color -> System.out.println(color.getName()));
     }
-}
+} 
 
 class Color implements Comparable<Color> {
     private String name;
@@ -66,13 +54,15 @@ class Color implements Comparable<Color> {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Color color = (Color) o;
-
         return this.name.equals(color.name);
     }
 
     @Override
     public int hashCode() {
-        return this.name.hashCode();
+        final int PRIME = 31;
+        int result = 1;
+        result = PRIME * result + ((this.name == null) ? 0 : this.name.hashCode());
+        return result;
     }
 
     @Override
